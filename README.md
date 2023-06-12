@@ -61,7 +61,7 @@ python producer.py
 python consumer_sms.py
 ```
 
-та запустити `consumer_email`
+та `consumer_email`
 
 ```shell
 python consumer_email.py
