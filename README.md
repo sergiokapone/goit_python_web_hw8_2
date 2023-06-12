@@ -35,7 +35,7 @@ docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.11-manageme
 Для заповнення бази даних та виклику `producer`'а запустіть
 
 ```shell
-python upload.py
+python producer.py
 ```
 
 `producer` встановить зв'язок з базою даних (яка знаходиться в хмарі) та з брокером, що запущений у режимі `Docker`-демона і завантадить фейкові дані:
