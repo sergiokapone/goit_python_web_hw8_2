@@ -82,5 +82,6 @@ python consumer_email.py
 
 ## Додаткові матеріали
 
-- [Python API for RabbitMQ (official documentatio)](https://www.rabbitmq.com/tutorials/tutorial-one-python.html)
+- [Python API for RabbitMQ (official documentation)](https://www.rabbitmq.com/tutorials/tutorial-one-python.html)
 - [RabbitMQ in 5 Minutes](https://www.youtube.com/watch?v=deG25y_r6OY&t=310s)
+- [MongoEngine User Documentation](https://docs.mongoengine.org/)
