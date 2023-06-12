@@ -8,10 +8,6 @@
 
 ![Вигляд програми](./pictures/view.png)
 
-## Схема роботи
-
-![схема роботи](./pictures/scheme.png)
-
 ## Встановлення Docker-образу `RabbitMQ`
 
 Встановити локально сервіс `RabbitMQ` можна за допомогою [`Docker`-образу](https://hub.docker.com/_/rabbitmq):
@@ -79,3 +75,7 @@ python consumer_email.py
 ![Вигляд черг в адмінці RabbitMQ](./pictures/rabbitmq_run.png)
 
 При спустошенні черги `consumer`'и залишаються в режимі очікування доки `producer` не згенерує нові завдання.
+
+## Схема роботи
+
+![схема роботи](./pictures/scheme.png)
