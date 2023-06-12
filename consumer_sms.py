@@ -3,21 +3,31 @@ import time
 import logging
 import traceback
 
+import colorlog
+
 from database.models import Contact
 from brocker.connect import connect
 from database.connect import get_database
 from bson import ObjectId
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(message)s'
+color_formatter = colorlog.ColoredFormatter(
+    '%(log_color)s%(asctime)s - %(message)s',
+    log_colors={
+        'DEBUG': 'cyan',
+        'INFO': 'green',
+        'WARNING': 'yellow',
+        'ERROR': 'red',
+        'CRITICAL': 'red,bg_white',
+    }
 )
-logger = logging.getLogger(__name__)
 
 console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
-logger.addHandler(console_handler)
+console_handler.setFormatter(color_formatter)
 
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+logger.addHandler(console_handler)
 
 def send_sms(ch, method, properties, body):
 

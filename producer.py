@@ -1,9 +1,32 @@
+import logging
 import random
+
+import colorlog
 
 from faker import Faker
 from database.models import Contact
 from database.connect import get_database
 from brocker.connect import connect
+
+color_formatter = colorlog.ColoredFormatter(
+    '%(log_color)s%(asctime)s - %(message)s',
+    log_colors={
+        'DEBUG': 'cyan',
+        'INFO': 'green',
+        'WARNING': 'yellow',
+        'ERROR': 'red',
+        'CRITICAL': 'red,bg_white',
+    }
+)
+
+
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(color_formatter)
+
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+logger.addHandler(console_handler)
 
 def make_contacts(amount: int) -> list:
     fake = Faker()
@@ -33,7 +56,7 @@ if __name__ == "__main__":
     for contact in make_contacts(100):
         contact.save()
 
-    print("<== Database filled with contacts. ==>")
+    logger.info("<== Database filled with contacts. ==>")
 
     # Створення черг в брокері
     channel.queue_declare(queue='email_queue')
@@ -61,6 +84,6 @@ if __name__ == "__main__":
                                     body=str(contact.id).encode())
 
 
-    print ("<== Messages sent to the appropriate queues. ==>")
+    logger.info("<== Messages sent to the appropriate queues. ==>")
     channel.close()
     db.close()

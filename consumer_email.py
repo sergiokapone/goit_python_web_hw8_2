@@ -3,19 +3,31 @@ import time
 import logging
 import traceback
 
+import colorlog
+
 from database.models import Contact
 from brocker.connect import connect
 from database.connect import get_database
 from bson import ObjectId
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(message)s'
+color_formatter = colorlog.ColoredFormatter(
+    '%(log_color)s%(asctime)s - %(message)s',
+    log_colors={
+        'DEBUG': 'cyan',
+        'INFO': 'green',
+        'WARNING': 'yellow',
+        'ERROR': 'red',
+        'CRITICAL': 'red,bg_white',
+    }
 )
-logger = logging.getLogger(__name__)
+
 
 console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(color_formatter)
+
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 logger.addHandler(console_handler)
 
 
@@ -42,7 +54,7 @@ if __name__ == '__main__':
     channel.basic_qos(prefetch_count=1)
     channel.queue_declare(queue='email_queue')
     channel.basic_consume(queue='email_queue', on_message_callback=send_email)
-    
+
     try:
         channel.start_consuming()
     except KeyboardInterrupt:
