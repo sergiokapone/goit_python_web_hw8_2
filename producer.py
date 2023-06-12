@@ -1,6 +1,8 @@
 import random
+import sys
 
 from faker import Faker
+import pika
 from database.models import Contact
 from database.connect import get_database
 from brocker.connect import connect
@@ -26,7 +28,13 @@ def make_contacts(amount: int) -> list:
 
 if __name__ == "__main__":
     db = get_database().client
-    channel = connect()
+   
+    try:
+        channel = connect()
+    except pika.exceptions.AMQPConnectionError as e:
+        logger.error("Failed to connect to RabbitMQ.")
+        logger.error(str(e))
+        sys.exit(1)
 
     # Очищення бази 
     Contact.objects().delete()

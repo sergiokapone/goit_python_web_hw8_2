@@ -2,6 +2,8 @@ import sys
 import time
 import traceback
 
+import pika
+
 
 from logger.project_logger import logger
 from database.models import Contact
@@ -28,7 +30,14 @@ def send_sms(ch, method, properties, body):
 
 if __name__ == '__main__':
     get_database().client
-    channel = connect()
+    
+    try:
+        channel = connect()
+    except pika.exceptions.AMQPConnectionError as e:
+        logger.error("Failed to connect to RabbitMQ.")
+        logger.error(str(e))
+        sys.exit(1)
+    
     channel.basic_qos(prefetch_count=1)
     channel.queue_declare(queue='sms_queue')
     channel.basic_consume(queue='sms_queue', on_message_callback=send_sms)
