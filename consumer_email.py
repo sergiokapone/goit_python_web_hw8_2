@@ -21,11 +21,11 @@ logger.addHandler(console_handler)
 
 def send_email(ch, method, properties, body):
     contact_id = body.decode()
-    record = Contact.objects.get(id=ObjectId(contact_id))
-    if not record.sent:
-        record.sent = True
-        logger.info(f"email => {record.username}")
-        record.save()
+    contact = Contact.objects.get(id=ObjectId(contact_id))
+    if not contact.sent:
+        contact.sent = True
+        logger.info(f"email => {contact.username}")
+        contact.save()
         
         # Код для відправки
         # ...
