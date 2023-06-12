@@ -1,5 +1,8 @@
+import sys
 import time
 import logging
+import traceback
+
 from database.models import Contact
 from brocker.connect import connect
 from database.connect import get_database
@@ -38,4 +41,11 @@ if __name__ == '__main__':
     channel.basic_qos(prefetch_count=1)
     channel.queue_declare(queue='sms_queue')
     channel.basic_consume(queue='sms_queue', on_message_callback=send_sms)
-    channel.start_consuming()
+    try:
+        channel.start_consuming()
+    except KeyboardInterrupt:
+        channel.stop_consuming()
+    except Exception:
+        channel.stop_consuming()
+        traceback.print_exc(file=sys.stdout)
+
