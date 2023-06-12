@@ -5,6 +5,7 @@ import traceback
 
 import colorlog
 
+from logger.project_logger import logger
 from database.models import Contact
 from brocker.connect import connect
 from database.connect import get_database
