@@ -79,3 +79,8 @@ python consumer_email.py
 ## Схема роботи
 
 ![схема роботи](./pictures/scheme.png)
+
+## Додаткові матеріали
+
+- [Python API for RabbitMQ (official documentatio)](https://www.rabbitmq.com/tutorials/tutorial-one-python.html)
+- [RabbitMQ in 5 Minutes](https://www.youtube.com/watch?v=deG25y_r6OY&t=310s)
