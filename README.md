@@ -8,6 +8,10 @@
 
 ![Вигляд програми](./pictures/view.png)
 
+## Схема роботи
+
+![схема роботи](./pictures/scheme.png)
+
 ## Встановлення Docker-образу `RabbitMQ`
 
 Встановити локально сервіс `RabbitMQ` можна за допомогою [`Docker`-образу](https://hub.docker.com/_/rabbitmq):
