@@ -20,6 +20,7 @@ logger.addHandler(console_handler)
 
 
 def send_email(ch, method, properties, body):
+
     contact_id = body.decode()
     contact = Contact.objects.get(id=ObjectId(contact_id))
     if not contact.sent:
@@ -41,6 +42,7 @@ if __name__ == '__main__':
     channel.basic_qos(prefetch_count=1)
     channel.queue_declare(queue='email_queue')
     channel.basic_consume(queue='email_queue', on_message_callback=send_email)
+    
     try:
         channel.start_consuming()
     except KeyboardInterrupt:
