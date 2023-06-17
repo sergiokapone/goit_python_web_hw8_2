@@ -1,4 +1,4 @@
-# Домашнє завдання 8 (друга частина)
+# Домашнє завдання 8 (друга частина) <img align="right" width="32px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"/> <img align="right" width="32px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"/>
 
 Використання [`RabbitMQ`](https://www.rabbitmq.com/)[^1] для імітації розсилки за допомогою черг. Імітується розсилка на `email` та `sms`. Дані про контакти беруться з бази даних `MongoDB`.
 
